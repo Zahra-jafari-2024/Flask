@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block title %}
+Login
+{% endblock%}
+
+{% block content%}
+{% with messages=get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category,message in messages %}
+     <div class="alert alert-{{category}}" role="alert">
+       {{message}}
+     </div>
+    {% endfor %}
+  {% endif %}   
+{% endwith %}     
+  <!-- do section -->
+
+  <section class="do_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h1>Login</h1>
+        <form method="post">
+          <div class="mb-3">
+            <label class="form-label">UserName</label>
+            <input type="text" class="form-control" name="username">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password">
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  {% endblock%}

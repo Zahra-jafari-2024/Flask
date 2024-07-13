@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block title %}
+BMR 
+{% endblock%}
+
+{% block content%}
+  <!-- do section -->
+  <section class="do_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+      <form method="post">
+        <div class="mb-3" >
+          <label class="form-label">Height</label>
+          <input type="text" class="form-control" name="height">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Weight</label>
+          <input type="text" class="form-control" name="weight">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input type="text" class="form-control" name="age">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <input type="text" class="form-control" name="gender">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+  <!-- end do section -->
+  {% endblock%}
+ 

@@ -1,0 +1,6 @@
+flask
+bcrypt
+sqlmodel
+opencv-python
+ultralytics
+

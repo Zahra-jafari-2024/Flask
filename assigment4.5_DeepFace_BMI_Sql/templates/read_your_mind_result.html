@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}   
+
+{% block title %}
+
+Mind Reader Result
+
+{% endblock %}
+
+{% block content %}  
+   
+<div class="card mt=10">
+    <div class="card-header">
+      ...
+    </div>
+    <div class="card-body">
+      <div id="my_progress_bar" class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div id="my_progress_bar_child" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+      </div> 
+           
+      <div class="card-body  mt=8" >
+        <h3 id="my_number" class="card-title " style="visibility:hidden">your thinking number is :: ({{number }}) </h3>
+      </div>
+    </div>
+  </div>
+
+<script>
+function sleep(ms){
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    let start_progress = async function(){
+        var my_progress_bar = document.getElementById("my_progress_bar");
+        var my_progress_bar_child = document.getElementById("my_progress_bar_child");
+        var my_number = document.getElementById("my_number");
+        
+        for(var i=0; i<=100; i++){
+            my_progress_bar.setAttribute("aria-valuenow", i);
+            my_progress_bar_child.setAttribute("style", "width: " + i + "%")
+            console.log(i)
+            await sleep(50);
+            
+        }
+        document.getElementById("my_number").style.visibility = "visible"; 
+    }
+start_progress();
+</script>  
+  {% endblock %} 
+
+
+  

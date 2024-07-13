@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block title %}
+Upload 
+{% endblock%}
+
+{% block content%}
+    <!-- end header section -->
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h1 >Upload an image of your face</h1>
+  <br>
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" id="formFile" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+<br>
+<br>
+<br>
+<br>
+
+{% endblock%}
+
