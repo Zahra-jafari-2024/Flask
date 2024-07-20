@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+Mind Reader
+
+{% endblock %}
+
+{% block content %}
+<section class="who_section layout_padding">
+
+    <div class="card" mt="5">
+      <div class="card-header">
+        ...
+      </div>
+      <div class="card-body">
+        <h3 class="card-title"> Mind Reader
+        </h3>
+        <p class="card-text  ">What number are you thinking of ?</p>
+        <form method="post">
+          <input type="number" name="number">
+          <button class="btn btn-primary" type="submit"> Submit </button>
+        </form>
+      </div>
+    </div>
+<br>
+
+</section>
+
+{% endblock %}
