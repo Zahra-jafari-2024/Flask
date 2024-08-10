@@ -1,6 +1,6 @@
 # AI Web Application
 
-## describe
+## Describe
 
 This is a application that utilizes for face analysis and BMR calculator..
 
@@ -21,14 +21,16 @@ This is a application that utilizes for face analysis and BMR calculator..
 ## Docker
 
   
+  ```bash
   docker pull postgres
+  ```
   
-  
+  ```bash
   docker build -t ai_web_app .
- 
- 
+  ```
+  ```bash
   docker build -t ai_web_app .
- 
+  ```
 
 
 ## Docker compose
