@@ -11,7 +11,8 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-
+  
+ 
   <title>
     {% block title %}
     {% endblock %}
@@ -31,7 +32,15 @@
   <link href="{{url_for('static', filename='/css/style.css')}}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{{url_for('static', filename='/css/responsive.css')}}" rel="stylesheet" />
-  
+  <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.2/ckeditor5.css" />
+  <script type="importmap">
+    {
+        "imports": {
+            "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.2/ckeditor5.js",
+            "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.2/"
+        }
+    }
+</script>
 
 <body class="sub_page">
   <div class="hero_area">

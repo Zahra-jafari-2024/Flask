@@ -15,6 +15,9 @@ from src.age_gender_estimation import AgeGenderEstimator
 from datetime import datetime
 from database import relative_time_from_string
 
+
+
+
 app = Flask("analyze_face")
 app.config["UPLOAD_FOLDER"]="./uploads"
 app.config["ALLOWED_EXTENSION"]={'PNG','JPG','JPEG'}
@@ -98,16 +101,17 @@ def upload():
                 se = select(User, Comment).join(Comment, User.id == Comment.user_id)
                 results = session.exec(se).all()
                 data = []
-                for User, Comment in results:
-                    data.append({
+                for user, comment in results:
+                   x = (str(comment.timestamp)).split(".")
+                   data.append({
                     
-                    "firstname": User.firstname,
-                    "lastname":  User.lastname,
-                    "comment": Comment.content,
-                    "timestamp": Comment.timestamp
+                    "firstname": user.firstname,
+                    "lastname":  user.lastname,
+                    "comment": comment.content,
+                    "timestamp": relative_time_from_string(x[0])
                     
                     })
-                print(data)   
+                
                 return render_template("upload.html",data=data)
             
         elif request.method=="POST":
@@ -257,7 +261,22 @@ def admin():
             formatted_time = parsed_time.strftime('%Y-%m-%d %H:%M:%S')
             user.join_time = relative_time_from_string(formatted_time)  
             print (str(flask_seesion.get('firstname')))
-      return render_template("admin.html", username1= str(flask_seesion.get('firstname')) + " " + str(flask_seesion.get('lastname')) , users=all_users , user_count= users_count)
+      with Session(engine) as session:
+                se = select(User, Comment).join(Comment, User.id == Comment.user_id)
+                results = session.exec(se).all()
+                data = []
+                for user, comment in results:
+                   x = (str(comment.timestamp)).split(".")
+                   data.append({
+                    
+                    "firstname": user.firstname,
+                    "lastname":  user.lastname,
+                    "comment": comment.content,
+                    "timestamp": relative_time_from_string(x[0]),
+                    "service" : comment.services
+                    
+                    })      
+      return render_template("admin.html", username1= str(flask_seesion.get('firstname')) + " " + str(flask_seesion.get('lastname')) , users=all_users , user_count= users_count,data=data)
 
     return redirect(url_for("login"))
 

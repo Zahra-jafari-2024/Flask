@@ -4,7 +4,13 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<style>
+.table-container {
+  width: 100%; /* Set the desired width */
+  height: 300px; /* Set the desired height */
+  overflow: auto; /* Enable scrolling */
+}
+</style>
 
 
   <!-- bootstrap core css -->
@@ -22,7 +28,7 @@
   <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
   <meta name="robots" content="nindex, nofollow">
   </head>
-  <body>
+  <body> 
   
   
 
@@ -318,7 +324,7 @@ Menu
 <h5 class="card-header">Recent Orders</h5>
 <div class="card-body p-0">
 <div class="table-responsive">
-<table class="table">
+<table class="table" >
 <thead class="bg-light">
 <tr class="border-0">
 <th class="border-0">#</th>
@@ -378,8 +384,48 @@ Menu
 
 </div>
 
-
-
+<div class="row" >
+  
+  <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12" >
+  <div class="card" >
+  <h5 class="card-header">Comment</h5>
+  <div class="card-body p-0">
+  <div class="table-responsive">
+  <div class="table-container">
+  <table class="table">
+  <thead class="bg-light">
+  <tr class="border-0">
+  <th class="border-0">#</th>
+  <th class="border-0">Icon</th>
+  <th class="border-0">Username</th>
+  <th class="border-0">lastname</th>
+  <th class="border-0">timestamp</th>
+  <th class="border-0">services</th>
+  <th class="border-0">comment</th>
+  
+  </tr>
+  </thead>
+  <tbody>
+  {% for coment in data %} 
+  <tr>
+  <td>  </td>
+  <td>
+  <div class="m-r-10"><img src="{{url_for('static', filename='/assets/images/im6.png')}}"  alt="user" class="rounded" width="45"></div>
+  </td>
+  <td> {{ coment.firstname }} </td>
+  <td>{{coment.lastname }} </td>
+  <td>{{ coment.timestamp }} </td>
+  <td>{{ coment.service }} </td>
+  <td with="350">{{ coment.comment | safe }}</td>
+  </tr>
+  <tr>
+   {% endfor %}
+  </table>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
 
 
 

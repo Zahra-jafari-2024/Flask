@@ -20,10 +20,10 @@ Upload
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-      
+        
 
 
-        <div class="row" mt="3">
+        <div class="row" style="margin-top:60px">
 
 
 
@@ -54,7 +54,7 @@ Upload
           </td>
           <td> {{ item.firstname }} </td>
           <td>{{ item.lastname }} </td>
-          <td>{{ item.comment  }}</td>
+          <td>{{ item.comment | safe }} </td>
           <td>{{ item.timestamp }}</td>
           </tr>
           <tr>
@@ -63,12 +63,35 @@ Upload
           </div>
           </div>
           </div>
-        
+          <script type="module">
+            import {
+                ClassicEditor,
+                Essentials,
+                Bold,
+                Italic,
+                Font,
+                Paragraph
+            } from 'ckeditor5';
+          
+            ClassicEditor
+                .create( document.querySelector( '#editor' ), {
+                    plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+                    toolbar: {
+                        items: [
+                            'undo', 'redo', '|', 'bold', 'italic', '|',
+                            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                        ]
+                    }
+                } )
+                .then( /* ... */ )
+                .catch( /* ... */ );
+          </script>
+          
 
 
 
          <!-- INSERT COMMENT -->
-        <div class="row">
+        <div class="row" style="margin-top:60px">
             <div class="col">
               <form method="post" action="/add-new-comment">
                 <div class="mb-3">
