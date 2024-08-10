@@ -29,7 +29,7 @@ This is a application that utilizes for face analysis and BMR calculator..
   docker build -t ai_web_app .
   ```
   ```bash
-  docker build -t ai_web_app .
+  docker build -t api_app .
   ```
 
 
