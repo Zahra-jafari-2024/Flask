@@ -26,7 +26,7 @@ This is a application that utilizes for face analysis and BMR calculator..
   ```bash
   docker build -t ai_web_app .
  
-```bash
+  ```bash
   docker build -t ai_web_app .
   ```
 
