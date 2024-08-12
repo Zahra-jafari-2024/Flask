@@ -1,0 +1,122 @@
+{% extends 'layout.html' %}
+{% block title %}
+Upload 
+{% endblock%}
+
+{% block content%}
+<style>
+  .table-container {
+    width: 100%; /* Set the desired width */
+    height: 300px; /* Set the desired height */
+    overflow: auto; /* Enable scrolling */
+  }
+  </style>
+
+    <!-- end header section -->
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h1 >Upload an image of your face</h1>
+  <br>
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" id="formFile" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        
+
+
+        <div class="row" style="margin-top:60px">
+
+
+
+          <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
+          <div class="card">
+          <h5 class="card-header">Comment </h5>
+          <div class="card-body p-0">
+          <div class="table-responsive">
+          <div class="table-container">  
+          <table class="table">
+          <thead class="bg-light">
+          <tr class="border-0">
+          <th class="border-0">#</th>
+          <th class="border-0">Icon</th>
+          <th class="border-0">first_name</th>
+          <th class="border-0">last_name</th>
+          <th class="border-0">comment</th>
+          <th class="border-0">join_time</th>
+          
+         
+          </tr>
+          </thead>
+          <tbody>
+          {% for item in data %}
+          <tr>
+          <td> </td>
+          <td>
+          <div class="m-r-10"><img src="{{url_for('static', filename='/assets/images/im6.png')}}"  alt="user" class="rounded" width="45"></div>
+          </td>
+          <td> {{ item.firstname }} </td>
+          <td>{{ item.lastname }} </td>
+          <td>{{ item.comment | safe }} </td>
+          <td>{{ item.timestamp }}</td>
+          </tr>
+          <tr>
+           {% endfor %}
+          </table>
+          </div>
+          </div>
+          </div>
+          </div>
+          <script type="module">
+            import {
+                ClassicEditor,
+                Essentials,
+                Bold,
+                Italic,
+                Font,
+                Paragraph
+            } from 'ckeditor5';
+          
+            ClassicEditor
+                .create( document.querySelector( '#editor' ), {
+                    plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+                    toolbar: {
+                        items: [
+                            'undo', 'redo', '|', 'bold', 'italic', '|',
+                            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                        ]
+                    }
+                } )
+                .then( /* ... */ )
+                .catch( /* ... */ );
+          </script>
+          
+
+
+
+         <!-- INSERT COMMENT -->
+        <div class="row" style="margin-top:60px">
+            <div class="col">
+              <form method="post" action="/add-new-comment">
+                <div class="mb-3">
+                  <label for="exampleFormControlTextarea1" class="form-label"></label>
+                  <textarea class="form-control" id="editor" row="3"
+                    name="comment">Your commnet...</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+           
+<br>
+<br>
+<br>
+<br>
+
+{% endblock%}
+
