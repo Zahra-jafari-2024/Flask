@@ -158,7 +158,7 @@ def login():
 
         if user:
             password_byte = login_model.password.encode("utf-8")
-            if bcrypt.checkpw(password_byte, user.password):
+            if bcrypt.checkpw(password_byte, bytes( user.password , "utf-8" )):
                flask_seesion['userid']=user.id
                flask_seesion['username']=user.username
                flask_seesion['firstname']=user.firstname
@@ -205,12 +205,14 @@ def register():
         
        if not result:
              if(register_data.password==register_data.confirm_password) :    
-               
+                password_byte = register_data.password.encode("utf-8")
+                hashed_password = bcrypt.hashpw(password_byte , bcrypt.gensalt())
+                hashed_password = hashed_password.decode("utf-8")
                 with Session(engine) as db_session:
                     user = User(
                         username = register_data.username,
                         city = register_data.city,
-                        password  = bcrypt.hashpw(register_data.password.encode('utf-8'),bcrypt.gensalt()),
+                        password  = hashed_password,
                         firstname = register_data.firstname,
                         lastname = register_data.lastname,
                         country = register_data.country,

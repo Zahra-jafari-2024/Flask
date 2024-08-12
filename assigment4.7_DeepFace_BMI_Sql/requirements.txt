@@ -1,6 +1,10 @@
 flask
 bcrypt
 sqlmodel
+pillow
+numpy
 opencv-python
-ultralytics
-
+onnxruntime
+pyyaml
+psycopg2
+scikit-image

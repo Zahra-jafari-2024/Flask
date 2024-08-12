@@ -45,7 +45,7 @@ class Comment(SQLModel, table=True):
     user: User = Relationship(back_populates="comments")
 
 
-engine = create_engine('sqlite:///./database.db', echo=True)
+engine = create_engine('postgresql://root:5Jthn9l9aZv6VwB30uIQEg98@thirsty-borg-9tawfy-ii-db:5432/postgres', echo=True)
 #engine = create_engine('postgresql://db_user:1234@localhost:15432/db', echo=True)
 
 SQLModel.metadata.create_all(engine)
