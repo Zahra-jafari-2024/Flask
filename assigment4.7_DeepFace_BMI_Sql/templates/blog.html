@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}   
+
+{% block title %}
+Blog 
+{% endblock %}
+
+{% block content %}  
+
+
+  <!-- who section -->
+
+  <section class="who_section layout_padding" >
+    <div class="container" >
+      
+      <div class="row" style="margin-top:60px ;margin-Bottom:80px">
+        {% for topic in topics %}
+        <div class="list-group">
+          <a href="/topic/{{topic.id}}" class="list-group-item list-group-item-action " aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1" style="margin-top:10px;">{{ topic.title}}</h5>
+            </div>  
+            <div>
+              <small >{{topic.timestamp}}</small>
+            </div>
+            <p style="text-align: justify;margin-top:20px" class="mb-1">{{ topic.text | truncate(400) | safe  }}</p>
+            
+          </a>
+          {% endfor %}
+        </div>
+             
+      </div>
+    </div>
+  </section>
+
+
+
+
+  
+    </a>
+  {% endblock %} 
+
+
+  

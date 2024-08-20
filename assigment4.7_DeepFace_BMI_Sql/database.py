@@ -44,9 +44,17 @@ class Comment(SQLModel, table=True):
     user_id: int = Field(foreign_key="user.id")
     user: User = Relationship(back_populates="comments")
 
+class Topic(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    title:str
+    timestamp: datetime = Field(default_factory=datetime.now) 
+    text:str
+    user_id: int = Field(foreign_key="user.id")
 
-engine = create_engine('postgresql://root:5Jthn9l9aZv6VwB30uIQEg98@thirsty-borg-9tawfy-ii-db:5432/postgres', echo=True)
+#engine = create_engine('postgresql://root:5Jthn9l9aZv6VwB30uIQEg98@thirsty-borg-9tawfy-ii-db:5432/postgres', echo=True)
 #engine = create_engine('postgresql://db_user:1234@localhost:15432/db', echo=True)
+#engine = create_engine('postgres://koyeb-adm:kOpEl5Zvin8g@ep-black-union-a2lt29y7.eu-central-1.pg.koyeb.app/database', echo=True)
+engine = create_engine('sqlite:///./database.db', echo=True)
 
 SQLModel.metadata.create_all(engine)
 

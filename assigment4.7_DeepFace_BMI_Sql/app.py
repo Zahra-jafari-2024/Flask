@@ -1,7 +1,7 @@
 import os
 import cv2
 import datetime
-from database import User, RegisterModel, LoginModel, engine , CommentModel,Comment
+from database import User, RegisterModel, LoginModel, engine , CommentModel,Comment,Topic
 from sqlmodel import Session , select
 from pydantic import ValidationError
 from flask import Flask, render_template, send_file,request,redirect,session as flask_seesion,url_for , flash
@@ -45,12 +45,10 @@ def about():
     return render_template("about.html")
 
 @app.route("/contact")
-def blog():
+def contact():
     return render_template("contact.html")
 
-@app.route("/do")
-def contact():
-    return render_template("do.html")
+
 
 @app.route("/result")
 def result():
@@ -278,7 +276,8 @@ def admin():
                     "service" : comment.services
                     
                     })      
-      return render_template("admin.html", username1= str(flask_seesion.get('firstname')) + " " + str(flask_seesion.get('lastname')) , users=all_users , user_count= users_count,data=data)
+      x =(datetime.now())
+      return render_template("admin.html", username1= str(flask_seesion.get('firstname')) + " " + str(flask_seesion.get('lastname')) , users=all_users , user_count= users_count, data=data, date1=x.strftime('%Y-%m-%d'))
 
     return redirect(url_for("login"))
 
@@ -303,5 +302,77 @@ def add_comment():
         db_session.add(coment1)
         db_session.commit()  
         flash("your register done successfully", "success") 
-        return redirect(url_for("home"))    
+        return redirect(url_for("card"))    
            
+@app.route("/blog")
+def blog():
+    with Session(engine) as db_session:
+            statement = select(Topic)
+            result =list(db_session.exec(statement))
+            return render_template("blog.html" , topics=result)
+
+
+
+@app.route("/topic/<int:topic_id>")
+def topic(topic_id : int):
+   with Session(engine) as db_session:
+            statement = select(Topic).where(Topic.id==topic_id)
+            result =db_session.exec(statement).first()
+            return render_template("topic.html" , topic=result) 
+
+@app.route("/admin-blog")
+def admin_blog():
+       with Session(engine) as db_session:
+            statement = select(Topic)
+            result =list(db_session.exec(statement))
+            return render_template("admincopy.html" , topics=result) 
+
+
+@app.route("/adminblog-edit/<int:topic_id>" , methods=["GET","POST"])
+def adminblog_edit(topic_id : int):
+         if flask_seesion.get('userid'): 
+           with Session(engine) as db_session:
+                statement = select(Topic).where(Topic.id==topic_id)
+                result= db_session.exec(statement).first()
+                if request.method=="GET":
+                   return render_template("adminblog_edit.html" , topic=result)   
+                else:
+                    result.title=request.form["title"]
+                    result.text=request.form["text"]
+                    db_session.commit()
+                    db_session.refresh(result)
+                    return redirect(url_for("admin_blog"))
+
+
+@app.route("/adminblog/delete/<int:topic_id>", methods=["GET","POST"])
+def deletePost(topic_id : int ):
+     if flask_seesion.get('userid'): 
+           with Session(engine) as db_session:
+                statement = select(Topic).where(Topic.id==topic_id)
+                result= db_session.exec(statement).first()
+                if request.method=="GET":
+                   return render_template("adminblog_delete.html")   
+                else:
+                    db_session.delete(result)
+                    db_session.commit()
+                    return redirect(url_for("admin_blog"))
+        
+
+
+@app.route("/adminblog/add" , methods=["GET","POST"] ) 
+def add_blog():
+    if request.method=="GET":
+           return render_template("adminblog_add.html")   
+    else:
+      with Session(engine) as db_session:
+        user_id=flask_seesion.get('userid')
+        title=request.form["title"]
+        text=request.form["text"]
+        new_post = Topic(title=title , text=text  ,user_id=user_id , time_stamp=datetime.now())
+        db_session.add(new_post)
+        db_session.commit()
+        db_session.refresh(new_post)
+        return redirect(url_for("admin_blog"))
+
+if __name__== "__main__" :
+     app.run(port="8000" , debug=True)

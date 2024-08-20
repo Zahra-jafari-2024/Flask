@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}   
+
+{% block title %}
+Topic 
+{% endblock %}
+
+{% block content %}  
+
+
+  <!-- who section -->
+
+  <section class="who_section layout_padding" >
+    <div class="container" >
+      
+      <div class="row" style="margin-top:60px ;margin-Bottom:80px">
+       
+        <h5  dir="rtl" > {{ topic.title}}</h5>
+             
+         <small style="padding-left:85%">{{topic.timestamp}}</small>
+     <div>
+         <p  dir="rtl" style="text-align: justify  " class="mb-1"> {{ topic.text }}</p>
+     </div>   
+            
+     
+     
+
+
+        
+      
+    </div>
+  </section>
+
+  {% endblock %} 
+
+
+  
